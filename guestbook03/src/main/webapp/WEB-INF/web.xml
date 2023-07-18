@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>guestbook03</display-name>
+  <!--Context Parameter  (Application 전역 변수)--> <!-- 검색해도음 -->
+	<context-param>
+    	<param-name> contextConfigLocation </param-name>
+     	<param-value>/WEB-INF/applicationContext.xml</param-value>
+	</context-param>
+	<!-- Encoding Filter -->
+	<filter>
+	   <filter-name>encodingFilter</filter-name> <!-- 한글깨짐현상 -->
+	   <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	   <init-param>
+	      <param-name>encoding</param-name>
+	      <param-value>UTF-8</param-value>
+	   </init-param>
+	</filter>  
+	<filter-mapping>
+	   <filter-name>encodingFilter</filter-name>
+	   <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- Context Load Listener --> 
+	<listener>
+    	<listener-class> org.springframework.web.context.ContextLoaderListener </listener-class>
+	</listener>
+	<!-- Dispatcher Servlet --> <!-- 이름에 의미 주의 -->
+	<servlet> 
+		<servlet-name>spring</servlet-name> <!-- spring-servlet.xml 에서 servlet이름, dispatcher라고 이름 바꾸기도 하고 -->
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>  
+	<servlet-mapping>
+		<servlet-name>spring</servlet-name>
+		<url-pattern>/</url-pattern> <!-- 모든 경로 --> <!-- /hello로 시작하는 모든 요청은 다 받겟다 -->
+	</servlet-mapping>
+  
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
